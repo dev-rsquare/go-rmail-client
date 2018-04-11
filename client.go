@@ -46,6 +46,9 @@ func (client *Client) sendMail(query string, vars interface{}) {
 	req.Header.Add("Content-Type", "application/json")
 
 	resp, err := httpClient.Do(req)
+	if err != nil {
+		panic("Rmail Response is errored")
+	}
 	defer resp.Body.Close()
 
 	b, err := ioutil.ReadAll(resp.Body)
