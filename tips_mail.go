@@ -2,7 +2,7 @@ package rmail
 
 func (client *Client) CreateTip(tipId int){
 	query := `
-		mutation sendTodoMail($id: Int!){
+		mutation sendCreateTipMail($id: Int!){
 			send_mail{
 			tips{
 				add_tip(tip_id: $id)

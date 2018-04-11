@@ -2,7 +2,7 @@ package rmail
 
 func (client *Client) ChangeTaskEvent(taskId int, event string){
 	query := `
-		mutation sendTodoMail($id: Int!, $event: String!){
+		mutation sendChangeTaskEventMail($id: Int!, $event: String!){
 			send_mail{
 			tasks{
 				change_task_event(task_id: $id, event: $event)
