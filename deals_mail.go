@@ -15,3 +15,20 @@ func (client *Client) CreateDeal(dealId int) {
 	}
 	client.sendMail(query, vars)
 }
+
+func (client *Client) AddUserToDeal(dealId int, userId int) {
+	query := `
+		mutation sendAddUserToDealMail($deal_id: Int!, $user_id: Int!) {
+			send_mail {
+				deals {
+					add_user_to_deal(deal_id: $deal_id, user_id: $user_id)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"deal_id": dealId,
+		"user_id": userId,
+	}
+	client.sendMail(query, vars)
+}
