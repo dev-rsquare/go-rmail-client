@@ -32,3 +32,20 @@ func (client *Client) AddUserToDeal(dealId int, userId int) {
 	}
 	client.sendMail(query, vars)
 }
+
+func (client *Client) RemoveUserFromDeal(dealId int, userId int) {
+	query := `
+		mutation sendRemoveUserFromDealMail($deal_id: Int!, $user_id: Int!) {
+			send_mail {
+				deals {
+					remove_user_from_deal(deal_id: $deal_id, user_id: $user_id)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"deal_id": dealId,
+		"user_id": userId,
+	}
+	client.sendMail(query, vars)
+}
