@@ -5,7 +5,7 @@ func (client *Client) AddPerson(personId int) {
 		mutation sendCreatePersonMail($person_id: Int!) {
 			send_mail {
 				people {
-					create_person(person_id: $id)
+					create_person(person_id: $person_id)
 				}
 			}
 		}
