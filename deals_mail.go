@@ -49,3 +49,20 @@ func (client *Client) RemoveUserFromDeal(dealId int, userId int) {
 	}
 	client.sendMail(query, vars)
 }
+
+func (client *Client) ChangeDealProgress(dealId int, previousProgress string) {
+	query := `
+		mutation sendChangeDealProgressMail($deal_id: Int!, $previous_progress: String!) {
+			send_mail {
+				deals {
+					change_deal_progress(deal_id: $deal_id, previous_progress: $previous_progress)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"deal_id":           dealId,
+		"previous_progress": previousProgress,
+	}
+	client.sendMail(query, vars)
+}
