@@ -2,16 +2,19 @@ package rmail
 
 import "strings"
 
-type RMailEnv = string
+// Env : Environment deployed RMail Servers
+type Env = string
 
 const (
-	Development RMailEnv = "devel"
-	Production  RMailEnv = "prod"
+	// Development : Dev
+	Development Env = "devel"
+	// Production : Prod
+	Production Env = "prod"
 )
 
-func findRMailEnv(envStr string) RMailEnv {
+func findRMailEnv(envStr string) Env {
 
-	var env RMailEnv
+	var env Env
 
 	switch strings.ToLower(envStr) {
 	case "prod":
@@ -24,7 +27,7 @@ func findRMailEnv(envStr string) RMailEnv {
 	return env
 }
 
-func findRMailHost(env RMailEnv) string {
+func findRMailHost(env Env) string {
 
 	var host string
 
@@ -37,7 +40,7 @@ func findRMailHost(env RMailEnv) string {
 	return host
 }
 
-func findRMailAuthorization(env RMailEnv) string {
+func findRMailAuthorization(env Env) string {
 
 	var authorization string
 

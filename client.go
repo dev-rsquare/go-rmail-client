@@ -6,12 +6,15 @@ import "bytes"
 import "fmt"
 import "io/ioutil"
 
+// Client struct store metadata and functions for executing queries
 type Client struct {
-	Env           RMailEnv
+	Env           Env
 	Host          string
 	Authorization string
 }
 
+// InitClient : Initiaize Client
+// envStr is environment string ("development" or "production" or "prod")
 func InitClient(envStr string) *Client {
 
 	env := findRMailEnv(envStr)

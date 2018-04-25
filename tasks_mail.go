@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) ChangeTaskEvent(taskId int, event string){
+// ChangeTaskEvent : send mail when changed task's event
+func (client *Client) ChangeTaskEvent(taskID int, event string) {
 	query := `
 		mutation sendChangeTaskEventMail($id: Int!, $event: String!){
 			send_mail{
@@ -11,7 +12,7 @@ func (client *Client) ChangeTaskEvent(taskId int, event string){
 		}
 	`
 	vars := map[string]interface{}{
-		"id": taskId,
+		"id":    taskID,
 		"event": event,
 	}
 	client.sendMail(query, vars)

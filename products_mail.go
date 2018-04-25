@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) ManageProductCreate(productId int) {
+// ManageProductCreate : send mail when created product
+func (client *Client) ManageProductCreate(productID int) {
 	query := `
 		mutation sendCreateProductMail($id: Int!) {
 			send_mail {
@@ -11,12 +12,13 @@ func (client *Client) ManageProductCreate(productId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"id": productId,
+		"id": productID,
 	}
 	client.sendMail(query, vars)
 }
 
-func (client *Client) ManageProductDelete(productId int) {
+// ManageProductDelete : send mail when deleted product
+func (client *Client) ManageProductDelete(productID int) {
 	query := `
 		mutation sendDeleteProductMail($id: Int!) {
 			send_mail {
@@ -27,7 +29,7 @@ func (client *Client) ManageProductDelete(productId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"id": productId,
+		"id": productID,
 	}
 	client.sendMail(query, vars)
 }

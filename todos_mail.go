@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) CreateTodos(todoIds []int){
+// CreateTodos : send mail when created todos
+func (client *Client) CreateTodos(todoIds []int) {
 	query := `
 		mutation sendCreateTodosMail($ids: [Int!]!){
 			send_mail{
@@ -15,10 +16,13 @@ func (client *Client) CreateTodos(todoIds []int){
 	}
 
 	client.sendMail(query, vars)
-	
+
 }
 
-func (client *Client) UpdateTodos(todoId int, oldTodo map[string]interface{}, userIds []int) {
+// UpdateTodos : send mail when updated todo.
+// oldTodo is the data before it is changed.
+// userIds is added user's array of id.
+func (client *Client) UpdateTodos(todoID int, oldTodo map[string]interface{}, userIds []int) {
 	query := `
 		mutation sendUpdateTodosMail($id: Int!, $old_Todo: Todo!, $added_user_id: [Int!]){
 			send_mail{
@@ -31,8 +35,8 @@ func (client *Client) UpdateTodos(todoId int, oldTodo map[string]interface{}, us
 		}
 	`
 	vars := map[string]interface{}{
-		"id": todoId,
-		"old_Todo": oldTodo,
+		"id":            todoID,
+		"old_Todo":      oldTodo,
 		"added_user_id": userIds,
 	}
 

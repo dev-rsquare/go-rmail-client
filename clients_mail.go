@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) AddClient(clientId int) {
+// AddClient : send mail when added client
+func (client *Client) AddClient(clientID int) {
 	query := `
 		mutation sendCreateClientMail($id: Int!) {
 			send_mail {
@@ -11,7 +12,7 @@ func (client *Client) AddClient(clientId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"id": clientId,
+		"id": clientID,
 	}
 	client.sendMail(query, vars)
 }

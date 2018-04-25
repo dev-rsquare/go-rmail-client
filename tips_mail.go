@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) CreateTip(tipId int){
+// CreateTip : send mail when created tip
+func (client *Client) CreateTip(tipID int) {
 	query := `
 		mutation sendCreateTipMail($id: Int!){
 			send_mail{
@@ -11,7 +12,7 @@ func (client *Client) CreateTip(tipId int){
 		}
 	`
 	vars := map[string]interface{}{
-		"id": tipId,
+		"id": tipID,
 	}
 	client.sendMail(query, vars)
 }

@@ -1,6 +1,7 @@
 package rmail
 
-func (client *Client) CreateDeal(dealId int) {
+// CreateDeal : send mail when created deal
+func (client *Client) CreateDeal(dealID int) {
 	query := `
 		mutation sendCreateDealMail($id: Int!) {
 			send_mail {
@@ -11,12 +12,13 @@ func (client *Client) CreateDeal(dealId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"id": dealId,
+		"id": dealID,
 	}
 	client.sendMail(query, vars)
 }
 
-func (client *Client) AddUserToDeal(dealId int, userId int) {
+// AddUserToDeal : send mail when added user to deal
+func (client *Client) AddUserToDeal(dealID int, userID int) {
 	query := `
 		mutation sendAddUserToDealMail($deal_id: Int!, $user_id: Int!) {
 			send_mail {
@@ -27,13 +29,14 @@ func (client *Client) AddUserToDeal(dealId int, userId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"deal_id": dealId,
-		"user_id": userId,
+		"deal_id": dealID,
+		"user_id": userID,
 	}
 	client.sendMail(query, vars)
 }
 
-func (client *Client) RemoveUserFromDeal(dealId int, userId int) {
+// RemoveUserFromDeal : send mail when removed user from deal
+func (client *Client) RemoveUserFromDeal(dealID int, userID int) {
 	query := `
 		mutation sendRemoveUserFromDealMail($deal_id: Int!, $user_id: Int!) {
 			send_mail {
@@ -44,13 +47,14 @@ func (client *Client) RemoveUserFromDeal(dealId int, userId int) {
 		}
 	`
 	vars := map[string]interface{}{
-		"deal_id": dealId,
-		"user_id": userId,
+		"deal_id": dealID,
+		"user_id": userID,
 	}
 	client.sendMail(query, vars)
 }
 
-func (client *Client) ChangeDealProgress(dealId int, previousProgress string) {
+// ChangeDealProgress : send mail when changed deal's progress
+func (client *Client) ChangeDealProgress(dealID int, previousProgress string) {
 	query := `
 		mutation sendChangeDealProgressMail($deal_id: Int!, $previous_progress: String!) {
 			send_mail {
@@ -61,7 +65,7 @@ func (client *Client) ChangeDealProgress(dealId int, previousProgress string) {
 		}
 	`
 	vars := map[string]interface{}{
-		"deal_id":           dealId,
+		"deal_id":           dealID,
 		"previous_progress": previousProgress,
 	}
 	client.sendMail(query, vars)
