@@ -33,3 +33,20 @@ func (client *Client) ManageProductDelete(productID int) {
 	}
 	client.sendMail(query, vars)
 }
+
+// ManageProductUpdate : send mail when updated product
+func (client *Client) ManageProductUpdate(oldProduct map[string]interface{}) {
+	query := `
+		mutation sendUpdateProductMail($oldProduct: Product!) {
+			send_mail {
+				products {
+					update_product(old_product: $oldProduct)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"oldProduct": oldProduct,
+	}
+	client.sendMail(query, vars)
+}
