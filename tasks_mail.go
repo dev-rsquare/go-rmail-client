@@ -19,18 +19,18 @@ func (client *Client) ChangeTaskEvent(taskID int, event string) {
 }
 
 // TakePhotosTask : send mail when created task for taking photos
-func (client *Client) TakePhotosTask(taskID int) {
+func (client *Client) TakePhotosTask(taskIds []int) {
 	query := `
-		mutation sendTakePhotosMail($taskId: Int!){
+		mutation sendTakePhotosMail($taskIds: [Int!]!){
 			send_mail{
 				tasks {
-					take_photos(task_id: $taskId)
+					take_photos(task_ids: $taskIds)
 				}
 			}
 		}
 	`
 	vars := map[string]interface{}{
-		"taskId":    taskID,
+		"taskIds": taskIds,
 	}
 	client.sendMail(query, vars)
 }
