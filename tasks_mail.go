@@ -34,3 +34,20 @@ func (client *Client) TakePhotosTask(taskIds []int) {
 	}
 	client.sendMail(query, vars)
 }
+
+// CheckProductsTask : send mail when created task for check products
+func (client *Client) CheckProductsTask(taskIds []int) {
+	query := `
+		mutation sendCheckProductsMail($taskIds: [Int!]!){
+			send_mail{
+				tasks {
+					check_products(task_ids: $taskIds)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"taskIds": taskIds,
+	}
+	client.sendMail(query, vars)
+}
