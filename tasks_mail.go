@@ -51,3 +51,20 @@ func (client *Client) CheckProductsTask(taskIds []int) {
 	}
 	client.sendMail(query, vars)
 }
+
+// CheckProductsTask : send mail when created task for check products
+func (client *Client) ChangeTaskProgressForWorks(taskId int) {
+	query := `
+		mutation sendChangeSalesNotifyTaskProgressMail($taskId: Int!){
+			send_mail{
+				tasks {
+					change_sales_notify_task_progress(task_id: $taskId)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"taskId": taskId,
+	}
+	client.sendMail(query, vars)
+}
