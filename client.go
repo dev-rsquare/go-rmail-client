@@ -15,14 +15,14 @@ type Client struct {
 
 // InitClient : Initiaize Client
 // envStr is environment string ("development" or "production" or "prod")
-func InitClient(envStr string) *Client {
+func InitClient(envStr string, token string) *Client {
 
 	env := findRMailEnv(envStr)
 
 	return &Client{
 		Env:           env,
 		Host:          findRMailHost(env),
-		Authorization: findRMailAuthorization(env),
+		Authorization: token,
 	}
 }
 

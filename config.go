@@ -7,9 +7,9 @@ type Env = string
 
 const (
 	// Development : Dev
-	Development Env = "devel"
+	Development = "devel"
 	// Production : Prod
-	Production Env = "prod"
+	Production = "prod"
 )
 
 func findRMailEnv(envStr string) Env {
@@ -38,17 +38,4 @@ func findRMailHost(env Env) string {
 	}
 
 	return host
-}
-
-func findRMailAuthorization(env Env) string {
-
-	var authorization string
-
-	if env == Development {
-		authorization = "Bearer 5356aabeb26db59a8afe5310b1a81f01df947611a9710ed2e96299cb42b29f8e"
-	} else {
-		authorization = "Bearer 3f5bb02d66f7cb38afbfc72d59c4536b950a2023838c29bacd517273946c636b"
-	}
-
-	return authorization
 }
