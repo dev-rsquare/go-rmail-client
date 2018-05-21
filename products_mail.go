@@ -50,3 +50,20 @@ func (client *Client) ManageProductUpdate(oldProduct map[string]interface{}) {
 	}
 	client.sendMail(query, vars)
 }
+
+// AddProductToFolder : send mail when product put to folder
+func (client *Client) AddProductToFolder(folderItemId int) {
+	query := `
+		mutation sendAddProductToFolderMail($folderItemId: Int!) {
+			send_mail {
+				folder_items {
+					add_product_to_folder(folder_item_id: $folderItemId)
+				}
+			}
+		}
+	`
+	vars := map[string]interface{}{
+		"folderItemId": folderItemId,
+	}
+	client.sendMail(query, vars)
+}
