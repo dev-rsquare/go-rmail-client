@@ -35,7 +35,7 @@ func (client *Client) ManageProductDelete(productID int) {
 }
 
 // ManageProductUpdate : send mail when updated product
-func (client *Client) ManageProductUpdate(oldProduct map[string]interface{}) {
+func (client *Client) ManageProductUpdate(oldProduct interface{}) {
 	query := `
 		mutation sendUpdateProductMail($oldProduct: Product!) {
 			send_mail {
