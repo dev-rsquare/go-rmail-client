@@ -59,3 +59,34 @@ func (client *Client) sendMail(query string, vars interface{}) {
 	fmt.Printf("%v", string(b))
 	fmt.Printf("%v", err)
 }
+
+func (client *Client) template(query string, vars interface{}) ([]byte, error) {
+
+	httpClient := http.DefaultClient
+
+	body := map[string]interface{}{
+		"query":     query,
+		"variables": vars,
+	}
+
+	bodyByte, err := json.Marshal(body)
+	if err != nil {
+		panic("RMail Request is invalid.")
+	}
+
+	req, err := http.NewRequest("POST", client.Host, bytes.NewReader(bodyByte))
+	if err != nil {
+		panic("RMail Request is invalid")
+	}
+
+	req.Header.Add("Authorization", client.Authorization)
+	req.Header.Add("Content-Type", "application/json")
+
+	resp, err := httpClient.Do(req)
+	if err != nil {
+		panic("Rmail Response is errored")
+	}
+	defer resp.Body.Close()
+
+	return ioutil.ReadAll(resp.Body)
+}

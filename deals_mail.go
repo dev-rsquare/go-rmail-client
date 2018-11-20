@@ -70,3 +70,25 @@ func (client *Client) ChangeDealProgress(dealID int, previousProgress string) {
 	}
 	client.sendMail(query, vars)
 }
+
+func (client *Client) InformServicesAndManagersTemplate(dealId int, clientId int, personId int) ([]byte, error) {
+	query := `
+		query ($dealId: Int!, $clientId: Int!, $personId: Int!) {
+			template {
+				deals {
+					inform_services_and_managers(deal_id: $dealId, client_id: $clientId, person_id: $personId) {
+						body
+					}
+				}
+			}
+		}
+	`
+
+	vars := map[string]interface{} {
+		"dealId": dealId,
+		"clientId": clientId,
+		"personId": personId,
+	}
+
+	return client.template(query, vars)
+}
