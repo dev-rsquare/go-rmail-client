@@ -68,3 +68,37 @@ func (client *Client) ChangeTaskProgressForWorks(taskId int) {
 	}
 	client.sendMail(query, vars)
 }
+
+// RequestCollectBuildingType : send mail when created task for collect_building_type
+func (client *Client) RequestCollectBuildingType(taskId int) {
+	query := `
+		mutation sendRequestCollectBuildingTypeMail($taskId: Int!) {
+		  send_mail {
+			tasks {
+			  request_collect_building_type(task_id: $taskId)
+			}
+		  }
+		}
+	`
+	vars := map[string]interface{}{
+		"taskId": taskId,
+	}
+	client.sendMail(query, vars)
+}
+
+// FinishCollectBuildingType : send mail when collect_building_type task is updated as 'completed'
+func (client *Client) FinishCollectBuildingType(taskId int) {
+	query := `
+		mutation sendFinishCollectBuildingTypeMail($taskId: Int!) {
+		  send_mail {
+			tasks {
+			  finish_collect_building_type(task_id: $taskId)
+			}
+		  }
+		}
+	`
+	vars := map[string]interface{}{
+		"taskId": taskId,
+	}
+	client.sendMail(query, vars)
+}
